@@ -5,7 +5,7 @@ public class Cat {
 	String furColor;
 	boolean isGirl;
 	
-	Cat(String name, String furColor, boolean isGirl) {
+	public Cat(String name, String furColor, boolean isGirl) {
 		this.name=name;
 		this.furColor=furColor;
 		this.isGirl=isGirl;

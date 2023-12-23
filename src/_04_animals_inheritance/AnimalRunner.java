@@ -1,5 +1,8 @@
 package _04_animals_inheritance;
 
+import _03_animals_original.Cat;
+import _03_animals_original.Dog;
+
 /*
  * 1. Similar to the shapes example, use inheritance to create classes 
  *   in order for this code to work.

@@ -16,14 +16,22 @@ import javax.swing.JPanel;
  * GOAL: Create your own custom pop-up messages
  */
 public class LeagueOptionPane {
-	
-	public static void showMessageDialog(String message) {
+	JFrame frame = new JFrame();
+	JPanel panel = new JPanel();
+	JLabel label = new JLabel();
+	JLabel Imagel = new JLabel();
+	public void showMessageDialog(String message) {
 		// 1. Open example.png and make a GUI that looks like that
 		//    The message parameter is what we want to show on our pop-up
+		label.setIcon(loadImage("leagueDark.png"));
+		label.setText(message);
+		panel.add(label);
+		frame.pack();
+		// setup the Frame (and panel)
 		
-		
+		woah();
 		// 2. Uncomment the line of code below. It sets the location of our frame to the center of the screen
-		//frame.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(null);
 	}
 	
 	// 3. Call this method in the Runner class
@@ -31,13 +39,29 @@ public class LeagueOptionPane {
 
 	// 4. Create another showMessageDialog() method that lets us also choose the Message and Title 
 	//    2 String parameters (one for the message and one for the title)
-	
+	public void showMessageDialog(String message, String title) {
+		Imagel.setIcon(loadImage("leagueDark.png"));
+		Imagel.setText(message);
+		panel.add(Imagel);
+		frame.pack();
+		woah();
+		frame.setLocationRelativeTo(null);
+		frame.setTitle(title);
+	}
 	// 5. Call this method in the Runner class
 	
 	
 	// 6. Create another showMessageDialog() method that lets us choose the Message, Title, and Image
 	//    3 String parameters (one for the message, one for the title, and one for the fileName)
-	
+	public void showMessageDialog(String message, String title, String image) {
+		Imagel.setIcon(loadImage(image));
+		Imagel.setText(message);
+		panel.add(Imagel);
+		frame.pack();
+		woah();
+		frame.setLocationRelativeTo(null);
+		frame.setTitle(title);
+	}
 	// 7. Call this method in the Runner class
 	
 	// CHALLENGE: 
@@ -56,7 +80,13 @@ public class LeagueOptionPane {
 		//	5. Call this method in the Runner class
 		//
 		// WHY DID WE DO THIS? - because we were able to overload this method by calling one of the other methods inside of it
-	
+	public void woah() {
+		frame.setVisible(true);
+		frame.add(panel);
+		frame.setSize(250, 100);
+		frame.setLocationRelativeTo(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 	
 	public static ImageIcon loadImage(String fileName) {
 		try {
