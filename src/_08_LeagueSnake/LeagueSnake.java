@@ -1,6 +1,7 @@
 package _08_LeagueSnake;
 
 import processing.core.PApplet;
+import java.awt.event.KeyEvent;
 
 public class LeagueSnake extends PApplet {
     static final int WIDTH = 800;
@@ -97,10 +98,20 @@ public class LeagueSnake extends PApplet {
      * These methods are used to change what is happening to the snake
      */
 
-    @Override
-    public void keyPressed() {
+    public void keyPressed(KeyEvent e) {
         // Set the direction of the snake according to the arrow keys pressed
-        
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+        	
+        }
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+
+        }
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+
+        }
+        if(e.getKeyCode() == KeyEvent.VK_UP) {
+
+        }
     }
 
     void move() {
