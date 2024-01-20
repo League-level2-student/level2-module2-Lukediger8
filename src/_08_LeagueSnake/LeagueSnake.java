@@ -2,6 +2,7 @@ package _08_LeagueSnake;
 
 import processing.core.PApplet;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class LeagueSnake extends PApplet {
     static final int WIDTH = 800;
@@ -18,7 +19,7 @@ public class LeagueSnake extends PApplet {
     int foodY;
     int direction = 0;
     int pieces = 0;
-
+    ArrayList<Segment> segment = new ArrayList<Segment>();
     
     /*
      * Setup methods
@@ -78,7 +79,7 @@ public class LeagueSnake extends PApplet {
     void drawTail() {
         // Draw each segment of the tail
     	 fill(0,0,255);
-    	rect(tail.x,head.y,10,10);
+    	rect(tail.x,tail.y,10,10);
        
     }
 
