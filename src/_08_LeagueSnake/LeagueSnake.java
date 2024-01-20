@@ -13,9 +13,10 @@ public class LeagueSnake extends PApplet {
      * Put all the game variables here.
      */
     Segment head;
+    Segment tail;
     int foodX;
     int foodY;
-    int direction = UP;
+    int direction = 0;
     int pieces = 0;
 
     
@@ -33,7 +34,8 @@ public class LeagueSnake extends PApplet {
     @Override
     public void setup() {
     	head = new Segment(250,250);
-        frameRate(20);
+    	tail = new Segment(250,250);
+        frameRate(7);
         dropFood();
     }
 
@@ -53,25 +55,31 @@ public class LeagueSnake extends PApplet {
     public void draw() {
     	   background(0,0,0);
            drawFood();
-           
+           move();
            drawSnake();
+           
+           eat();
     }
 
     void drawFood() {
         // Draw the food
-    	   square(foodX, foodY, 10);
-           fill(255,0,0);
+        fill(0,0,255); 
+    	square(foodX, foodY, 10);
+         
     }
     
     void drawSnake() {
         // Draw the head of the snake followed by its tail
-    	rect(head.x,head.y,10,10);
         fill(0,0,255);
+    	rect(head.x,head.y,10,10);
+
     }
 
     void drawTail() {
         // Draw each segment of the tail
-    	
+    	 fill(0,0,255);
+    	rect(tail.x,head.y,10,10);
+       
     }
 
     /*
@@ -84,7 +92,7 @@ public class LeagueSnake extends PApplet {
         // After drawing the tail, add a new segment at the "start" of the tail and
         // remove the one at the "end"
         // This produces the illusion of the snake tail moving.
-
+    	
     }
 
     void checkTailCollision() {
@@ -98,19 +106,19 @@ public class LeagueSnake extends PApplet {
      * These methods are used to change what is happening to the snake
      */
 
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed() {
         // Set the direction of the snake according to the arrow keys pressed
-        if(e.getKeyCode() == KeyEvent.VK_UP) {
-        	
+        if(keyCode == KeyEvent.VK_UP) {
+        	direction = UP; 
         }
-        if(e.getKeyCode() == KeyEvent.VK_UP) {
-
+        if(keyCode == KeyEvent.VK_DOWN) {
+        	direction = DOWN;							
         }
-        if(e.getKeyCode() == KeyEvent.VK_UP) {
-
+        if(keyCode == KeyEvent.VK_RIGHT) {
+        	direction = RIGHT;
         }
-        if(e.getKeyCode() == KeyEvent.VK_UP) {
-
+        if(keyCode == KeyEvent.VK_LEFT) {
+        	direction = LEFT;
         }
     }
 
@@ -120,16 +128,16 @@ public class LeagueSnake extends PApplet {
         
         if (direction == UP) {
             // Move head up
-        	direction = UP;
+        	head.y-=10;
         } else if (direction == DOWN) {
             // Move head down
-        	direction = DOWN;
+        head.y+=10;
                 
         } else if (direction == LEFT) {
-        	direction = LEFT;
+        	head.x-=10;
             
         } else if (direction == RIGHT) {
-        	direction = RIGHT;
+        	head.x+=10;
         }
         
     }
@@ -148,7 +156,9 @@ public class LeagueSnake extends PApplet {
         // When the snake eats the food, its tail should grow and more
         // food appear
         if(head.x == foodX && head.y == foodY) {
-        	
+        	pieces++;
+        	foodX = ((int)random(50)*10);
+            foodY = ((int)random(50)*10);
         }
     }
 
