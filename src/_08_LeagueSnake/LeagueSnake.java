@@ -79,8 +79,9 @@ public class LeagueSnake extends PApplet {
     void drawTail() {
         // Draw each segment of the tail
     	 fill(0,0,255);
-    	rect(tail.x,tail.y,10,10);
-       
+    	 for (Segment i : segment) {
+    	 rect(tail.x,tail.y,10,10);
+    	 }
     }
 
     /*
@@ -93,8 +94,13 @@ public class LeagueSnake extends PApplet {
         // After drawing the tail, add a new segment at the "start" of the tail and
         // remove the one at the "end"
         // This produces the illusion of the snake tail moving.
-    	
+    	checkTailCollision();
+    	drawTail();
+    	segment.add(new Segment(head.x, head.y));
+    	segment.remove(0);
     }
+
+    
 
     void checkTailCollision() {
         // If the snake crosses its own tail, shrink the tail back to one segment
