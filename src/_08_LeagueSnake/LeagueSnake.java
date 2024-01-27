@@ -14,7 +14,6 @@ public class LeagueSnake extends PApplet {
      * Put all the game variables here.
      */
     Segment head;
-    Segment tail;
     int foodX;
     int foodY;
     int direction = 0;
@@ -35,9 +34,9 @@ public class LeagueSnake extends PApplet {
     @Override
     public void setup() {
     	head = new Segment(250,250);
-    	tail = new Segment(250,250);
         frameRate(7);
         dropFood();
+        
     }
 
     void dropFood() {
@@ -57,14 +56,13 @@ public class LeagueSnake extends PApplet {
     	   background(0,0,0);
            drawFood();
            move();
-           drawSnake();
-           
+           drawSnake();           
            eat();
     }
 
     void drawFood() {
         // Draw the food
-        fill(0,0,255); 
+        fill(255,255,255); 
     	square(foodX, foodY, 10);
          
     }
@@ -73,6 +71,7 @@ public class LeagueSnake extends PApplet {
         // Draw the head of the snake followed by its tail
         fill(0,0,255);
     	rect(head.x,head.y,10,10);
+    	manageTail();
 
     }
 
@@ -80,7 +79,8 @@ public class LeagueSnake extends PApplet {
         // Draw each segment of the tail
     	 fill(0,0,255);
     	 for (Segment i : segment) {
-    	 rect(tail.x,tail.y,10,10);
+    		 rect(i.x,i.y,10,10);
+    	 
     	 }
     }
 
@@ -98,13 +98,22 @@ public class LeagueSnake extends PApplet {
     	drawTail();
     	segment.add(new Segment(head.x, head.y));
     	segment.remove(0);
-    }
+        }
 
     
 
     void checkTailCollision() {
         // If the snake crosses its own tail, shrink the tail back to one segment
-        
+       int jay = segment.size();
+       for(int i = 0; i<jay; i++) {
+    	   if(head.x == segment.get(i).x) {
+    		   if(head.y == segment.get(i).y) {
+    			   pieces = 1;
+    			   segment = new ArrayList<Segment>();
+    			   segment.add(new Segment(head.x, head.y));
+    		   }
+    	   }
+       }
     }
 
     /*
@@ -147,6 +156,8 @@ public class LeagueSnake extends PApplet {
         	head.x+=10;
         }
         
+        checkBoundaries();
+        
     }
 
     void checkBoundaries() {
@@ -157,6 +168,12 @@ public class LeagueSnake extends PApplet {
         else if(head.y>500) {
         	head.y = 0;
         }
+        else if(head.x<0) {
+        	head.x = 500;
+        }
+        else if(head.y < 0) {
+        	head.y = 500;
+        }
     }
 
     void eat() {
@@ -166,6 +183,7 @@ public class LeagueSnake extends PApplet {
         	pieces++;
         	foodX = ((int)random(50)*10);
             foodY = ((int)random(50)*10);
+            segment.add(new Segment(head.x, head.y));
         }
     }
 
