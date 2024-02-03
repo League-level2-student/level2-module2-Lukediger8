@@ -1,3 +1,4 @@
+
 package _08_LeagueSnake;
 
 import processing.core.PApplet;
@@ -111,6 +112,7 @@ public class LeagueSnake extends PApplet {
     			   pieces = 1;
     			   segment = new ArrayList<Segment>();
     			   segment.add(new Segment(head.x, head.y));
+    			   break;
     		   }
     	   }
        }
